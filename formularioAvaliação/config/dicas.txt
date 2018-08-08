@@ -1,0 +1,6 @@
+verificar os registros
+1- abra o mongo db
+2- selecione o banco
+use formularios 
+db.getCollectionNames();
+db.usuarios.find();
