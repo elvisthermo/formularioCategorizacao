@@ -1,215 +1,917 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-	<head>
-		<meta charset="UTF-8">
-		<title>Formulário de Avaliação</title>
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-        <link href="css/style.css" rel="stylesheet">
-	</head>
-	<body class="body-index">
-    <div class="custom-background"></div>
-		<nav class="navbar navbar-default navbar-static-top">
-			<div class="container">
-				<% if(validacao.length > 0){ %>
-					<div class="alert alert-danger">
-						<strong>Atenção!</strong>
-						<ul>
-							<% for(var i = 0; i < validacao.length; i++){ %>
-								<li><%= validacao[i].msg %></li>
-							<% } %>
-						</ul>
-					</div>
-				<% } %>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulário de Avaliação</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="data/ML.js"></script>
+    <script src="data/FACEBOOK.js"></script>
+    <script src="data/GOOGLE.js"></script>
+    <script src="data/G1.js"></script>
+    <script src="data/UFPA.js"></script>
+    <script src="data/YOUTUBE.js"></script>
+    <link href="css/style.css" rel="stylesheet">
 
-                <% if (typeof finalizado != "undefined"){ %>
-                    <% console.log("formulario finalizado"); }%>
+</head>
+<body class="body-index">
+<div class="custom-background"></div>
+<nav class="navbar navbar-default navbar-static-top">
 
-                <% var route = "cadastrar" %>
-                <%  if(number>0){%>
-                <%      route = "cadastrarQuests";%>
-                <%  }%>
-                <% typeof _id == "undefined"?  console.log("not access "): console.log(" access "+_id) %>
+    <div class="container">
+        <% if(validacao.length > 0){ %>
+            <div class="alert alert-danger">
+                <strong>Atenção!</strong>
+                <ul>
+                    <% for(var i = 0; i < validacao.length; i++){ %>
+                        <li><%= validacao[i].msg %></li>
+                    <% } %>
+                </ul>
+            </div>
+        <% } %>
+        <% if (typeof finalizado !== "undefined"){ %>
+        <% console.log("formularsio finalizado"); }%>
+        <% var route = "cadastrar" %>
+        <%  if(number>0){%>
+            <%      route = "cadastrarQuests";%>
+        <%  }%>
+        <% typeof _id == "undefined"?  console.log("not access "): console.log(" access "+_id) %>
 
-                <form id="regForm" action="<%=route%>" method="POST">
-                    <h1>Formulario de Avaliação:</h1>
+        <form id="regForm" action="<%=route%>" method="POST">
+            <h1>Formulario de Avaliação:</h1>
 
-                    <div class="tab">
-                        <p><input placeholder="Digite seu email"  type="email" name="_id"  value=" <%= typeof _id == "undefined"? "": _id %>"></p>
-                        <p><input placeholder=" Digite seu nome"  type="text" name="name" required></p>
-                    </div>
-                    <div class="tab">
-                        <p>1 - Talvez o teclado virtual tivesse que ser um pouco maior.*</p>
-                        <p><input placeholder="Digite sua resposta"  type="text" name="quest1" required></p>
-                    </div>
-                    <div class="tab">
-                        <p>2 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>
-                        <br>
-                        <label><input  type="radio" name="quest2" value="cor" required>Cor</label><br>
-                        <label><input  type="radio" name="quest2" value="forma">forma</label><br>
-                        <label><input  type="radio" name="quest2" value="textura">textura</label><br>
-                    </div>
-                    <div class="tab">
-                        <p>3 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>
-                        <label><input class="radio" type="radio" name="quest3" value="cor" required>Cor</label><br>
-                        <label><input class="radio" type="radio" name="quest3" value="forma">forma</label><br>
-                        <label><input class="radio" type="radio" name="quest3" value="textura">textura</label><br>
-                    </div>
-                    <div class="tab">
-                        <p>4 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>
-                        <label><input class="radio" type="radio" name="quest4" value="cor" required>Cor</label><br>
-                        <label><input class="radio" type="radio" name="quest4" value="forma">forma</label><br>
-                        <label><input class="radio" type="radio" name="quest4" value="textura">textura</label><br>
-                    </div>
-                    <div class="tab">
-                        <p>5 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>
-                        <label><input class="radio" type="radio" name="quest5" value="cor" required>Cor</label><br>
-                        <label><input class="radio" type="radio" name="quest5" value="forma">forma</label><br>
-                        <label><input class="radio" type="radio" name="quest5" value="textura">textura</label><br>
-                    </div>
-                    <div class="tab">
-                        <p>6 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>
-                        <label><input class="radio" type="radio" name="quest6" value="cor" required>Cor</label><br>
-                        <label><input class="radio" type="radio" name="quest6" value="forma">forma</label><br>
-                        <label><input class="radio" type="radio" name="quest6" value="textura">textura</label><br>
-                    </div>
-                    <div class="tab">
-                        <label><input id="number" type="number" name="number" value="<%=number %>" ></label><br>
+            <div class="tab">
+                <p><input placeholder="Digite seu email"  type="email" name="_id"  value=" <%= typeof _id == "undefined"? "": _id %>"></p>
+                <p><input placeholder=" Digite seu nome"  type="text" name="name" required></p>
+            </div>
 
-                    </div>
 
-                    <div style="overflow:auto;">
-                        <div style="float:right;">
-                            <button type="button" id="prevBtn" onclick="backPrev(-1)">Previous</button>
-                            <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
-                        </div>
-                    </div>
-                    <!--citculos dos passos do formulario-->
-                    <div style="text-align:center;margin-top:40px;">
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
-                        <span class="step"></span>
+            <script>
 
-                    </div>
-                </form>
-                <script>
-                    let element = document.getElementById("number").value;
-                    console.log(element);
+                let cont = 0;
 
-                    let currentTab = element;
+                $(ml).each(function (item,element) {
+                    console.log(item);
+                    console.log("teste de elemento:",element);
+                    if(element!==""){
+                        $('#regForm').append($("<div>")
+                            .addClass("tab")
+                            .append($("<div/>")
+                                .addClass("type")
+                                .attr("value","Mercado livre: "+element+"")
+                                .append($("<h3/>").text("Mercado livre: "+element+""+cont))
+                                .append($("<p/>").text("Interação")
+                                    .append($("<input/>")
+                                        .addClass("Interacao")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interação")))
+                                .append($("<p/>").text("Interface")
+                                    .append($("<input/>")
+                                        .addClass("Interface")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interface")))
+                                .append($("<p/>").text("Experiência")
+                                    .append($("<input/>")
+                                        .addClass("Experiencia")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Experiência")))
+                                .append($("<div>")
+                                    .addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro Interação:"))
+                                    .append($("<p/>").text("Precisão")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Precisão").text("Precisão")))
+                                    .append($("<p/>").text("tempo de click")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","tempo de click").text("tempo de click")))
+                                    .append($("<p/>").text("velocidade de movimentação")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","velocidade de movimentação").text("velocidade de movimentação")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                    ))
+                                .append($("<div/>").addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Interface:"))
+                                    .append($("<p/>").text("Tamanho do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tamanho do componente")))
+                                    .append($("<p/>").text("Tipo do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tipo do componente")))
+                                    .append($("<p/>").text("Localização do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Localização do componente")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subt-tipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                        .append($("<div/>").addClass("sub-menus")
+                                            .append($("<input/>")
+                                                .attr("name","frase"+cont)
+                                                .attr("value",element)
+                                                .css("display","nome").hide())
+                                            .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Experiencia:"))
+                                            .append($("<p/>").text("Frustração")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Frustração")))
+                                            .append($("<p/>").text("Esforço Fisico")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Esforço Fisico")))
+                                            .append($("<p/>").text("Estratégias para evitar erros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Estratégias para evitar erros")))
+                                            .append($("<p/>").text("Confusão")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Confusão")))
+                                            .append($("<p/>").text("Conforto")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Conforto")))
+                                            .append($("<p/>").text("outros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont))
+                                                .append($("<input/>")
+                                                    .attr("type","textarea")
+                                                    .attr("name","subt-tipo"+cont)
+                                                    .attr("placeholder","Digite a resposta"))
+                                            ))
+                                    ))
+                    ));
 
-                    showTab(currentTab);
-                    function showTab(n) {
-                        // This function will display the specified tab of the form...
-                        let x = document.getElementsByClassName("tab");
-                        x[n].style.display = "block";
-                        //... and fix the Previous/Next buttons:
-                        if (n == 0) {
-                            document.getElementById("prevBtn").style.display = "none";
-                        } else {
-                           document.getElementById("prevBtn").style.display = "inline";
-                       }
-                    if (n == (x.length - 2)) {
-                            document.getElementById("nextBtn").innerHTML = "Finalizar";
-                        } else {
-                            document.getElementById("nextBtn").innerHTML = "next";
-                          }
-                        //... and run a function that will display the correct step indicator:
-                          fixStepIndicator(n)
-                      }
 
-                    function backPrev(n) {
+                        cont++
+                    }
+                });
 
-                        let x = document.getElementsByClassName("tab");
-                        if (n == 1 && !validateForm()) return false;
-                        x[currentTab].style.display = "none";
-                        currentTab = currentTab -1;
-                        if(element>currentTab){
-                            console.log(currentTab);
-                            document.getElementById("number").value = currentTab;
-                        }
 
-                        if (currentTab >= x.length) {
-                            document.getElementById("regForm").submit();
-                            return false;
-                        }
-                        showTab(currentTab);
+                $(facebook).each(function (item,element) {
+                    console.log(item);
+
+                    if(element!==""){
+                        $('#regForm').append($("<div/>")
+                            .addClass("tab quest-div")
+                            .append($("<div/>")
+                                .addClass("type")
+                                .append($("<h3/>").text("Facebook:"+element+" "+cont))
+                                .append($("<p/>").text("Interação")
+                                    .append($("<input/>")
+                                        .addClass("Interacao")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interação")))
+                                .append($("<p/>").text("Interface")
+                                    .append($("<input/>")
+                                        .addClass("Interface")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interface")))
+                                .append($("<p/>").text("Experiência")
+                                    .append($("<input/>")
+                                        .addClass("Experiencia")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Experiência")))
+                                .append($("<div>")
+                                    .addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro Interação:"))
+                                    .append($("<p/>").text("Precisão")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Precisão").text("Precisão")))
+                                    .append($("<p/>").text("tempo de click")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","tempo de click").text("tempo de click")))
+                                    .append($("<p/>").text("velocidade de movimentação")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","velocidade de movimentação").text("velocidade de movimentação")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                    ))
+                                .append($("<div/>").addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Interface:"))
+                                    .append($("<p/>").text("Tamanho do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tamanho do componente")))
+                                    .append($("<p/>").text("Tipo do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tipo do componente")))
+                                    .append($("<p/>").text("Localização do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Localização do componente")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subt-tipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                        .append($("<div/>").addClass("sub-menus")
+                                            .append($("<input/>")
+                                                .attr("name","frase"+cont)
+                                                .attr("value",element)
+                                                .css("display","nome").hide())
+                                            .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Experiencia:"))
+                                            .append($("<p/>").text("Frustração")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Frustração")))
+                                            .append($("<p/>").text("Esforço Fisico")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Esforço Fisico")))
+                                            .append($("<p/>").text("Estratégias para evitar erros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Estratégias para evitar erros")))
+                                            .append($("<p/>").text("Confusão")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Confusão")))
+                                            .append($("<p/>").text("Conforto")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Conforto")))
+                                            .append($("<p/>").text("outros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont))
+                                                .append($("<input/>")
+                                                    .attr("type","textarea")
+                                                    .attr("name","subt-tipo"+cont)
+                                                    .attr("placeholder","Digite a resposta"))
+                                            ))
+                                    ))
+                            ));
+
+
+                        cont++
                     }
 
-                      function nextPrev(n) {
-                        // Esta função irá descobrir qual guia exibir
-                         let x = document.getElementsByClassName("tab");
 
-                         if (n == 1 && !validateForm()) return false;
-                          // Saia da função se algum campo da aba atual for inválido:
-                          document.getElementById("regForm").submit();
-                          x[currentTab].style.display = "none";
-                          // Aumenta ou diminui a aba atual em 1:
-                           //currentTab = currentTab + n;
-                          // se você chegou ao final do formulário ...
-                        if(currentTab >= x.length){
-                            // ... o formulário é enviado:
-                            //document.getElementById("regForm").submit();
-                            return false;
-                        }
-                        showTab(currentTab);
+                });
+
+
+                $(ufpa).each(function (item,element) {
+                    console.log(item);
+
+                    if(element!==""){
+                        $('#regForm').append($("<div>")
+                            .addClass("tab quest-div")
+                            .append($("<div/>")
+                                .addClass("type")
+                                .append($("<h3/>").text("UFPA:"+element+" "+cont))
+                                .append($("<p/>").text("Interação")
+                                    .append($("<input/>")
+                                        .addClass("Interacao")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interação")))
+                                .append($("<p/>").text("Interface")
+                                    .append($("<input/>")
+                                        .addClass("Interface")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interface")))
+                                .append($("<p/>").text("Experiência")
+                                    .append($("<input/>")
+                                        .addClass("Experiencia")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Experiência")))
+                                .append($("<div>")
+                                    .addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro Interação:"))
+                                    .append($("<p/>").text("Precisão")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Precisão").text("Precisão")))
+                                    .append($("<p/>").text("tempo de click")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","tempo de click").text("tempo de click")))
+                                    .append($("<p/>").text("velocidade de movimentação")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","velocidade de movimentação").text("velocidade de movimentação")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                    ))
+                                .append($("<div/>").addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Interface:"))
+                                    .append($("<p/>").text("Tamanho do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tamanho do componente")))
+                                    .append($("<p/>").text("Tipo do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tipo do componente")))
+                                    .append($("<p/>").text("Localização do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Localização do componente")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subt-tipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                        .append($("<div/>").addClass("sub-menus")
+                                            .append($("<input/>")
+                                                .attr("name","frase"+cont)
+                                                .attr("value",element)
+                                                .css("display","nome").hide())
+                                            .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Experiencia:"))
+                                            .append($("<p/>").text("Frustração")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Frustração")))
+                                            .append($("<p/>").text("Esforço Fisico")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Esforço Fisico")))
+                                            .append($("<p/>").text("Estratégias para evitar erros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Estratégias para evitar erros")))
+                                            .append($("<p/>").text("Confusão")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Confusão")))
+                                            .append($("<p/>").text("Conforto")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Conforto")))
+                                            .append($("<p/>").text("outros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont))
+                                                .append($("<input/>")
+                                                    .attr("type","textarea")
+                                                    .attr("name","subt-tipo"+cont)
+                                                    .attr("placeholder","Digite a resposta"))
+                                            ))
+                                    ))
+                            ));
+
+
+                        cont++
                     }
+                });
 
-                    function validateForm() {
-                        // Esta função lida com a validação dos campos do formulário
-                        let x, y, i, valid = true, count=0;
-                        x = document.getElementsByClassName("tab");
-                        y = x[currentTab].getElementsByTagName("input");
+                $(goolge).each(function (item,element) {
+                    console.log(item);
 
-                        let choices = [];
-                        var els = x[currentTab].getElementsByClassName("radio");
-                        //alert(els.length.toString());
-                        for (let i=0;i<els.length;i++){
-                            if ( els[i].checked == false ) {
-                                count++;
-                                if(count == els.length){
-                                els[0].className += " invalid";
-                                els[1].className += " invalid";
-                                els[2].className += " invalid";
+                    if(element!==""){
+                        $('#regForm').append($("<div>")
+                            .addClass("tab quest-div")
+                            .append($("<div/>")
+                                .addClass("type")
+                                .append($("<h3/>").text("goolge:"+element+" "+cont))
+                                .append($("<p/>").text("Interação")
+                                    .append($("<input/>")
+                                        .addClass("Interacao")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interação")))
+                                .append($("<p/>").text("Interface")
+                                    .append($("<input/>")
+                                        .addClass("Interface")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interface")))
+                                .append($("<p/>").text("Experiência")
+                                    .append($("<input/>")
+                                        .addClass("Experiencia")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Experiência")))
+                                .append($("<div>")
+                                    .addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro Interação:"))
+                                    .append($("<p/>").text("Precisão")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Precisão").text("Precisão")))
+                                    .append($("<p/>").text("tempo de click")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","tempo de click").text("tempo de click")))
+                                    .append($("<p/>").text("velocidade de movimentação")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","velocidade de movimentação").text("velocidade de movimentação")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                    ))
+                                .append($("<div/>").addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Interface:"))
+                                    .append($("<p/>").text("Tamanho do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tamanho do componente")))
+                                    .append($("<p/>").text("Tipo do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tipo do componente")))
+                                    .append($("<p/>").text("Localização do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Localização do componente")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subt-tipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                        .append($("<div/>").addClass("sub-menus")
+                                            .append($("<input/>")
+                                                .attr("name","frase"+cont)
+                                                .attr("value",element)
+                                                .css("display","nome").hide())
+                                            .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Experiencia:"))
+                                            .append($("<p/>").text("Frustração")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Frustração")))
+                                            .append($("<p/>").text("Esforço Fisico")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Esforço Fisico")))
+                                            .append($("<p/>").text("Estratégias para evitar erros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Estratégias para evitar erros")))
+                                            .append($("<p/>").text("Confusão")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Confusão")))
+                                            .append($("<p/>").text("Conforto")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Conforto")))
+                                            .append($("<p/>").text("outros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont))
+                                                .append($("<input/>")
+                                                    .attr("type","textarea")
+                                                    .attr("name","subt-tipo"+cont)
+                                                    .attr("placeholder","Digite a resposta"))
+                                            ))
+                                    ))
+                            ));
 
-                                valid = false;
-                                }else if(count<3){
-                                    valid = true;
 
-                                }
-
-                            }
-                            //    choices.push(els[i].value);
-                          //  }
-                        }
-
-                        // Um ​​loop que verifica todos os campos de entrada na guia atual:
-                        for (i = 0; i < y.length; i++) {
-                            // campo vazio
-                            if (y[i].value == "") {
-                                // add class invalid:
-                                y[i].className += " invalid";
-                                valid = false;
-                            }
-                        }
-                        // Se o status válido for verdadeiro, marque a etapa como concluída e válida:
-                        if (valid) {
-                            document.getElementsByClassName("step")[currentTab].className += " finish";
-                        }
-                        return valid;// devolve o status válido
+                        cont++
                     }
+                });
 
-                    function fixStepIndicator(n) {
-                        let i, x = document.getElementsByClassName("step");
-                        for (i = 0; i < x.length; i++) {
-                            x[i].className = x[i].className.replace(" active", "");
-                        }
-                        x[n].className += " active";
+                $(g1).each(function (item,element) {
+                    console.log(item);
+                    if(element!==""){
+                        $('#regForm').append($("<div>")
+                            .addClass("tab quest-div")
+                            .append($("<div/>")
+                                .addClass("type")
+                                .append($("<h3/>").text("G1:"+element+" "+cont))
+                                .append($("<p/>").text("Interação")
+                                    .append($("<input/>")
+                                        .addClass("Interacao")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interação")))
+                                .append($("<p/>").text("Interface")
+                                    .append($("<input/>")
+                                        .addClass("Interface")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Interface")))
+                                .append($("<p/>").text("Experiência")
+                                    .append($("<input/>")
+                                        .addClass("Experiencia")
+                                        .attr("type", "radio")
+                                        .attr("name", "tipo"+cont)
+                                        .attr("value", "Experiência")))
+                                .append($("<div>")
+                                    .addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro Interação:"))
+                                    .append($("<p/>").text("Precisão")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Precisão").text("Precisão")))
+                                    .append($("<p/>").text("tempo de click")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","tempo de click").text("tempo de click")))
+                                    .append($("<p/>").text("velocidade de movimentação")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","velocidade de movimentação").text("velocidade de movimentação")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                    ))
+                                .append($("<div/>").addClass("sub-menus")
+                                    .append($("<input/>").attr("name","frase"+cont)
+                                        .attr("value",element)
+                                        .css("display","nome").hide())
+                                    .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Interface:"))
+                                    .append($("<p/>").text("Tamanho do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tamanho do componente")))
+                                    .append($("<p/>").text("Tipo do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Tipo do componente")))
+                                    .append($("<p/>").text("Localização do componente")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont)
+                                            .attr("value","Localização do componente")))
+                                    .append($("<p/>").text("outros")
+                                        .append($("<input/>")
+                                            .attr("type","radio")
+                                            .attr("name","subtipo"+cont))
+                                        .append($("<input/>")
+                                            .attr("type","textarea")
+                                            .attr("name","subt-tipo"+cont)
+                                            .attr("placeholder","Digite a resposta"))
+                                        .append($("<div/>").addClass("sub-menus")
+                                            .append($("<input/>")
+                                                .attr("name","frase"+cont)
+                                                .attr("value",element)
+                                                .css("display","nome").hide())
+                                            .append($("<h4/>").text("Diga mais sobre como classificaria esse erro de Experiencia:"))
+                                            .append($("<p/>").text("Frustração")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Frustração")))
+                                            .append($("<p/>").text("Esforço Fisico")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Esforço Fisico")))
+                                            .append($("<p/>").text("Estratégias para evitar erros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Estratégias para evitar erros")))
+                                            .append($("<p/>").text("Confusão")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Confusão")))
+                                            .append($("<p/>").text("Conforto")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont)
+                                                    .attr("value","Conforto")))
+                                            .append($("<p/>").text("outros")
+                                                .append($("<input/>")
+                                                    .attr("type","radio")
+                                                    .attr("name","subtipo"+cont))
+                                                .append($("<input/>")
+                                                    .attr("type","textarea")
+                                                    .attr("name","subt-tipo"+cont)
+                                                    .attr("placeholder","Digite a resposta"))
+                                            ))
+                                    ))
+                            ));
+
+
+                        cont++
                     }
-                </script>
+                });
 
-	</body>
+                //criação das 3 primeiras respostas
+
+                //seleção da interação
+
+
+            </script>
+
+
+            <!--                    <div class="tab">-->
+            <!--                        <p>1 - Talvez o teclado virtual tivesse que ser um pouco maior.*</p>-->
+            <!--                        <p><input placeholder="Digite sua resposta"  type="text" name="quest1" required></p>-->
+            <!--                    </div>-->
+            <!--                    <div class="tab">-->
+            <!--                        <p>2 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>-->
+            <!--                        <br>-->
+            <!--                        <label><input  type="radio" name="quest2" value="cor" required>Cor</label><br>-->
+            <!--                        <label><input  type="radio" name="quest2" value="forma">forma</label><br>-->
+            <!--                        <label><input  type="radio" name="quest2" value="textura">textura</label><br>-->
+            <!--                    </div>-->
+            <!--                    <div class="tab">-->
+            <!--                        <p>3 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>-->
+            <!--                        <label><input class="radio" type="radio" name="quest3" value="cor" required>Cor</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest3" value="forma">forma</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest3" value="textura">textura</label><br>-->
+            <!--                    </div>-->
+            <!--                    <div class="tab">-->
+            <!--                        <p>4 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>-->
+            <!--                        <label><input class="radio" type="radio" name="quest4" value="cor" required>Cor</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest4" value="forma">forma</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest4" value="textura">textura</label><br>-->
+            <!--                    </div>-->
+            <!--                    <div class="tab">-->
+            <!--                        <p>5 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>-->
+            <!--                        <label><input class="radio" type="radio" name="quest5" value="cor" required>Cor</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest5" value="forma">forma</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest5" value="textura">textura</label><br>-->
+            <!--                    </div>-->
+            <!--                    <div class="tab">-->
+            <!--                        <p>6 - Na sua opinião qual a variável visual teve um nível mais DIFÍCIL de localização durante os testes? *</p>-->
+            <!--                        <label><input class="radio" type="radio" name="quest6" value="cor" required>Cor</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest6" value="forma">forma</label><br>-->
+            <!--                        <label><input class="radio" type="radio" name="quest6" value="textura">textura</label><br>-->
+            <!--                    </div>-->
+            <div class="tab">
+                <label><input id="number" type="number" name="number" value="<%=number %>" ></label><br>
+
+            </div>
+
+            <script>
+                console.log("valll:",$("#number").val());
+
+
+            </script>
+
+
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="backPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                </div>
+            </div>
+            <!--citculos dos passos do formulario-->
+            <div class="qtd" style="text-align:center;margin-top:40px;">
+            </div>
+            <script>
+                $( document ).ready(function() {
+                    $(ml).each(function () {
+                        $(".qtd").append($("<span/>").addClass("step"))
+                    });
+
+                    $(".qtd").hide();
+
+                });
+
+
+            </script>
+
+        </form>
+        <script>
+            let element = document.getElementById("number").value;
+            console.log(element);
+
+            let currentTab = element;
+
+            showTab(currentTab);
+            function showTab(n) {
+                // This function will display the specified tab of the form...
+                let x = document.getElementsByClassName("tab");
+                x[n].style.display = "block";
+                //... and fix the Previous/Next buttons:
+                if (n == 0) {
+                    document.getElementById("prevBtn").style.display = "none";
+                } else {
+                    document.getElementById("prevBtn").style.display = "inline";
+                }
+                if (n == (x.length - 2)) {
+                    document.getElementById("nextBtn").innerHTML = "Finalizar";
+                } else {
+                    document.getElementById("nextBtn").innerHTML = "next";
+                }
+                //... and run a function that will display the correct step indicator:
+                fixStepIndicator(n)
+            }
+
+            function backPrev(n) {
+
+                let x = document.getElementsByClassName("tab");
+                if (n == 1 && !validateForm()) return false;
+                x[currentTab].style.display = "none";
+                currentTab = currentTab -1;
+                if(element>currentTab){
+                    console.log(currentTab);
+                    document.getElementById("number").value = currentTab;
+                }
+
+                if (currentTab >= x.length) {
+                    document.getElementById("regForm").submit();
+                    return false;
+                }
+                showTab(currentTab);
+            }
+
+            function nextPrev(n) {
+                // Esta função irá descobrir qual guia exibir
+                let x = document.getElementsByClassName("tab");
+
+                if (n == 1 && !validateForm()) return false;
+                // Saia da função se algum campo da aba atual for inválido:
+                document.getElementById("regForm").submit();
+                x[currentTab].style.display = "none";
+                // Aumenta ou diminui a aba atual em 1:
+                //currentTab = currentTab + n;
+                // se você chegou ao final do formulário ...
+                if(currentTab >= x.length){
+                    // ... o formulário é enviado:
+                    //document.getElementById("regForm").submit();
+                    return false;
+                }
+                showTab(currentTab);
+            }
+
+            function validateForm() {
+                // Esta função lida com a validação dos campos do formulário
+                let x, y, i, valid = true, count=0;
+                x = document.getElementsByClassName("tab");
+                y = x[currentTab].getElementsByTagName("input");
+
+                let choices = [];
+                var els = x[currentTab].getElementsByClassName("radio");
+                //alert(els.length.toString());
+                for (let i=0;i<els.length;i++){
+                    if ( els[i].checked == false ) {
+                        count++;
+                        if(count == els.length){
+                            els[0].className += " invalid";
+                            els[1].className += " invalid";
+                            els[2].className += " invalid";
+
+                            valid = false;
+                        }else if(count<3){
+                            valid = true;
+
+                        }
+
+                    }
+                    //    choices.push(els[i].value);
+                    //  }
+                }
+
+                // Um ​​loop que verifica todos os campos de entrada na guia atual:
+                for (i = 0; i < y.length; i++) {
+                    // campo vazio
+                    if (y[i].value == "") {
+                        // add class invalid:
+                        // y[i].className += " invalid";
+                        // valid = false;
+                    }
+                }
+                // Se o status válido for verdadeiro, marque a etapa como concluída e válida:
+                if (valid) {
+                    document.getElementsByClassName("step")[currentTab].className += " finish";
+                }
+                return valid;// devolve o status válido
+            }
+
+            function fixStepIndicator(n) {
+                let i, x = document.getElementsByClassName("step");
+                for (i = 0; i < x.length; i++) {
+                    x[i].className = x[i].className.replace(" active", "");
+                }
+                x[n].className += " active";
+            }
+        </script>
+
+</body>
 </html>
