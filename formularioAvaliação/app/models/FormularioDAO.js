@@ -53,25 +53,24 @@ FormularioDAO.prototype.cadatrarQuest = function(usuario,form,req,res){
                 switch(form.number) {
                     case '1':
                         req.assert('quest1', 'A questão deve ser respondida').notEmpty();
-                        collection.update({_id:result[0]._id}, {$set:{frase0:form.frase0, tipo0:form.tipo0,subtipo0:form.subtipo0, number:form.number}});
-                        res.render('index', { validacao:{},form:{form},number:parseInt(form.number)+1, _id:req.session.usuario});
+                        collection.update({_id:result[0]._id}, {$set:{quest1:form.tipo0, number:form.number}});
+                        res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario});
                         break;
                     case '2':
-                        collection.update({_id:result[0]._id}, {$set:{frase1:form.frase1, tipo1:form.tipo1,subtipo1:form.subtipo1, number:form.number}});
-                        res.render('index', { validacao:{},form:{form},number:parseInt(form.number)+1, _id:req.session.usuario });
+                        collection.update({_id:result[0]._id}, {$set:{quest2:form.tipo1, number:form.number}});
+                        res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario });
                         break;
                     case '3':
-                        collection.update({_id:result[0]._id}, {$set:{frase2:form.frase2, tipo2:form.tipo2,subtipo2:form.subtipo2, number:form.number}});
-                        res.render('index', { validacao:{},form:{form},number:parseInt(form.number)+1, _id:req.session.usuario });
+                        collection.update({_id:result[0]._id}, {$set:{quest3:form.tipo2, number:form.number}});
+                        res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario });
                         break;
                     case '4':
-                        collection.update({_id:result[0]._id}, {$set:{frase3:form.frase3, tipo3:form.tipo3,subtipo3:form.subtipo3,number:form.number}});
-                        res.render('index', { validacao:{},form:{form},number:parseInt(form.number)+1, _id:req.session.usuario });
+                        collection.update({_id:result[0]._id}, {$set:{quest4:form.tipo3, number:form.number}});
+                        res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario });
                         break;
                     case '5':
-                        collection.update({_id:result[0]._id}, {$set:{frase4:form.frase4, tipo4:form.tipo4,subtipo4:form.subtipo4, number:form.number}});
-                        res.render('index', { validacao:{},form:{form},number:parseInt(form.number)+1, _id:req.session.usuario });
-
+                        collection.update({_id:result[0]._id}, {$set:{quest5:form.tipo4, number:form.number}});
+                        res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario });
                         break;
                     default:
                         res.render('end');
