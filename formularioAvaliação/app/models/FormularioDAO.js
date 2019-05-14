@@ -50,24 +50,16 @@ FormularioDAO.prototype.cadatrarQuest = function(usuario,form,req,res){
                     req.session._number = result[0].number;
                 }
 
-                var target = "id";
-                var field = form.number;
-
-                var obj = {};
-                obj[field] = target;
-
-
-
-
-                console.log("obj:",obj);
-
-                let cont_number = form.number;
-                console.log("formulario:",form);
                 // let quest =  req.session._number;
                 // switch(form.number) {
-                    // case '1':
+
+                if(form.number =='739'){
+                    res.render('end');
+                    console.log("Formulario finalizado");
+                }else{
                         collection.update({_id:result[0]._id},{$set:{[form.number]:form, number:form.number}},{"upsert":true});
                         res.render('index', { validacao:{},form:{},number:parseInt(form.number)+1, _id:req.session.usuario});
+                }
                 //         break;
                 //     case '2':
                 //         collection.update({_id:result[0]._id}, {$set:{frase1:form, number:form.number}});
